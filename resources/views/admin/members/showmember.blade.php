@@ -10,12 +10,12 @@
                     <!-- عرض بيانات الطالب -->
                     <div class="row g-5">
                         <div class="col-md-4 text-center">
-                            @if ($user->student->image == null)
+                            @if ($user->image == null)
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random&size=200"
                                      class="img-thumbnail rounded-circle shadow"
                                      style="width: 220px; height: 220px; object-fit: cover;">
                             @else
-                                <img src="{{ asset('storage/'.$user->image) }}"
+                                <img src="{{ asset('storage/public/Students/'.$user->image) }}"
                                      class="img-thumbnail rounded-circle shadow"
                                      style="width: 220px; height: 220px; object-fit: cover;" alt="UserImage">
                             @endif

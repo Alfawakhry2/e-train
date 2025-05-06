@@ -32,7 +32,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12 ">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="{{asset('front/img/logo.png')}}" alt="logo"> </a>
+                        <a class="navbar-brand" href="{{ url('') }}"> <img src="{{asset('front/img/logo.png')}}" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -49,11 +49,13 @@
                                     <a class="nav-link" href="about.html">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="cource.html">Courses</a>
+                                    <a class="nav-link" href="{{ url('front/all/courses') }}">Courses</a>
                                 </li>
+                                @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">Blog</a>
+                                    <a class="nav-link" href="blog.html">My Courses</a>
                                 </li>
+                                @endauth
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Pages
@@ -67,7 +69,6 @@
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                                 @guest
-
                                 <li class="d-none d-lg-block">
                                     <a class="btn_1" href="{{ route('login') }}">Login</a>
                                 </li>
@@ -84,7 +85,7 @@
                                 </li>
                             </li>
                             <li class="d-none d-lg-block">
-                                <a class="btn_1" href="{{ route('dashboard')}}">My Profile</a>
+                                <a class="btn_1" href="{{ __('profile')}}">My Profile</a>
                             </li>
                                 @endauth
                             </ul>
