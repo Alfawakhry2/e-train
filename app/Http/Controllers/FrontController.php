@@ -7,16 +7,18 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\Trainer;
 use App\Models\Category;
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
     //dashboard
-    public function dashboard(){
+    public function dashboard()
+    {
         $user_id = Auth::id();
-        $user = User::with('student','student.course', 'trainer')->where('id' , $user_id)->first();
-        return view('dashboard' , compact('user'));
+        $user = User::with('student', 'student.course', 'trainer')->where('id', $user_id)->first();
+        return view('dashboard', compact('user'));
     }
 
     //main page or index page with all category in main page
@@ -37,7 +39,7 @@ class FrontController extends Controller
     public function ShowCategory($id)
     {
         $category = Category::with('course')->findorfail($id);
-        return view('front.category.showcategory' , compact('category'));
+        return view('front.category.showcategory', compact('category'));
     }
 
 
@@ -61,7 +63,36 @@ class FrontController extends Controller
     //show specific course
     public function ShowCourse($id)
     {
-        $course = Course::findorfail($id);
+        $course = Course::with('student')->findorfail($id);
         return view('front.courses.showcourse', compact('course'));
+    }
+
+    //my courses with user id (authenticated)
+    public function mycourses()
+    {
+        $user_id = Auth::id();
+        $student = Student::where('user_id', $user_id)->first();
+        $courses = $student ? $student->course()->with('trainer')->get() : collect();
+
+        return view('front.courses.mycourses', compact('courses'));
+    }
+
+    //enrolled the course
+    public function enrolled($id)
+    {
+        $user_id = Auth::id();
+        $course = Course::findorfail($id);
+        $student =  Student::where('user_id', $user_id)->first();
+
+        if($student->course()->where('course_id' , $course->id)->exists()){
+            return redirect()->back()->with('info', 'You are already enrolled in this course.');
+        }
+        $student->course()->attach($course->id , [
+            'status'=>'active',
+            'course_location' => 'online',
+            'course_status'=>'in_progress',
+        ]);
+
+        return redirect()->back()->with('enrolled' , 'Enrolled Success');
     }
 }

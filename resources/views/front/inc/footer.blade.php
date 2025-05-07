@@ -68,6 +68,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jquery plugins here-->
     <!-- jquery -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+
     <script src="{{asset('front/js/jquery-1.12.1.min.js')}}"></script>
     <!-- popper js -->
     <script src="{{asset('front/js/popper.min.js')}}"></script>
@@ -88,6 +90,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{asset('front/js/waypoints.min.js')}}"></script>
     <!-- custom js -->
     <script src="{{asset('front/js/custom.js')}}"></script>
+
 </body>
 
 </html>

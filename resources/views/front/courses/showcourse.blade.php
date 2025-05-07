@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-8 course_details_left">
                     <div class="main_image">
-                        <img class="img-fluid" src="{{ asset("storage/$course->image") }}" alt="">
+                        <img class="img-fluid" src="{{ asset("storage/$course->image") }}" alt="" style="height:100% ; width:100%">
                     </div>
                     <div class="content_wrapper">
                         <h4 class="title_top">Course Details</h4>
@@ -66,6 +66,12 @@
 
 
                 <div class="col-lg-4 right-contents">
+                    @if (session('info'))
+                    <h5 class="text-center bg-danger text-light">{{session('info')}}</h5>
+                    @endif
+                    @if (session('enrolled'))
+                    <h5 class="text-center bg-success text-light">{{session('enrolled')}}</h5>
+                    @endif
                     <div class="sidebar_top">
                         <ul>
                             <li>
@@ -105,7 +111,12 @@
                             </li>
 
                         </ul>
-                        <a href="#" class="btn_1 d-block">Enroll the course</a>
+                        <form action="{{ route('enrolleCourse' , $course->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn_1 d-block">Enroll the course</button>
+                        </form>
+
+
                     </div>
 
                     {{-- <h4 class="title">Reviews</h4>

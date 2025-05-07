@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Etrain</title>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
     <link rel="icon" href="{{asset('front/img/favicon.png')}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('front/css/bootstrap.min.css')}}">
@@ -23,6 +25,8 @@
     <link rel="stylesheet" href="{{asset('front/css/slick.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{asset('front/css/style.css')}}">
+
+
 </head>
 
 <body>
@@ -53,7 +57,7 @@
                                 </li>
                                 @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">My Courses</a>
+                                    <a class="nav-link" href="{{ url('front/show/mycourses') }}">My Courses</a>
                                 </li>
                                 @endauth
                                 <li class="nav-item dropdown">
@@ -78,15 +82,18 @@
                                 @endguest
                                 @auth
                                 <li class="d-none d-lg-block">
+                                    <a class="btn_1" href="{{ url('profile')}}">Profile</a>
+                                </li>
+                                <li class="d-none d-lg-block">
+                                    <a class="btn_1" href="{{ url('dashboard')}}">Dashboard</a>
+                                </li>
+
+                                {{-- <li class="d-none d-lg-block">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn_1">Logout</button>
+                                        <button type="submit" class="btn_2">Logout</button>
                                     </form>
-                                </li>
-                            </li>
-                            <li class="d-none d-lg-block">
-                                <a class="btn_1" href="{{ __('profile')}}">My Profile</a>
-                            </li>
+                                </li> --}}
                                 @endauth
                             </ul>
                         </div>

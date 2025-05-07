@@ -228,7 +228,7 @@
     <!-- learning part end-->
 
     <!--::review_part start::-->
-    <section class="testimonial_part">
+    {{-- <section class="testimonial_part">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-xl-5">
@@ -342,11 +342,11 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--::blog_part end::-->
 
     <!--::blog_part start::-->
-    <section class="blog_part section_padding">
+    {{-- <section class="blog_part section_padding">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-5">
@@ -413,6 +413,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--::blog_part end::-->
     @endsection

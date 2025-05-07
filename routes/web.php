@@ -35,8 +35,16 @@ Route::controller(FrontController::class)->group(function(){
     //Courses section
     //show all courses random
     Route::get('front/all/courses' , 'AllCourses');
-    Route::get('front/show/course/{id}' , 'ShowCourse');
+    
+    Route::middleware('auth')->group(function(){
+        Route::get('front/show/course/{id}' , 'ShowCourse');
 
+        //show my courses
+        Route::get('front/show/mycourses' , 'mycourses');
+
+        //enrolled in course
+        Route::post('front/enrolled/course/{id}' , 'enrolled')->name('enrolleCourse');
+    });
 
 });
 
