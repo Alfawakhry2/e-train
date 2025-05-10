@@ -15,6 +15,10 @@ class IsStudent
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(auth()->check() && auth()->user()->role == 'student'){
+            return $next($request);
+        }else{
+            return redirect(url('/'));
+        }
     }
 }

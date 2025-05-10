@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\IsStudent;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', [FrontController::class , 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [FrontController::class , 'dashboard'])->middleware(['auth', IsStudent::class ,'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,15 +36,15 @@ Route::controller(FrontController::class)->group(function(){
     //Courses section
     //show all courses random
     Route::get('front/all/courses' , 'AllCourses');
-    
+
     Route::middleware('auth')->group(function(){
         Route::get('front/show/course/{id}' , 'ShowCourse');
 
         //show my courses
-        Route::get('front/show/mycourses' , 'mycourses');
+        Route::get('front/show/mycourses' , 'mycourses')->middleware(IsStudent::class);
 
         //enrolled in course
-        Route::post('front/enrolled/course/{id}' , 'enrolled')->name('enrolleCourse');
+        Route::post('front/enrolled/course/{id}' , 'enrolled')->name('enrolleCourse')->middleware(IsStudent::class);
     });
 
 });

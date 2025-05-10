@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 
 <head>
-    <title>@yield('title' , 'Admin')</title>
+    <title>@yield('title', 'Admin')</title>
     <meta charset="utf-8">
     <meta name="author" content="themesflat.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('front/img/logo.png') }}">
-<!-- Add this CSS for the rating stars -->
+    <!-- Add this CSS for the rating stars -->
 
 
 
@@ -37,9 +37,8 @@
 
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="{{ url("admin/dashboard") }}" id="site-logo-inner">
-                            <img class="" id="" alt=""
-                                src="{{asset('front/img/logo.png') }}"
+                        <a href="{{ url('admin/dashboard') }}" id="site-logo-inner">
+                            <img class="" id="" alt="" src="{{ asset('front/img/logo.png') }}"
                                 data-light="{{ asset('front/img/logo.png') }}"
                                 data-dark="{{ asset('front/img/logo.png') }}">
                         </a>
@@ -67,7 +66,7 @@
                                         <div class="text">Members</div>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="sub-menu-item" >
+                                        <li class="sub-menu-item">
                                             <a href="{{ url('admin/allmembers') }}" class="">
                                                 <div class="text">Show Members</div>
                                             </a>
@@ -96,7 +95,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ url('admin/allcategories')}}" class="">
+                                            <a href="{{ url('admin/allcategories') }}" class="">
                                                 <div class="text">All Categories</div>
                                             </a>
                                         </li>
@@ -114,7 +113,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{url('admin/allcourses')}}" class="">
+                                            <a href="{{ url('admin/allcourses') }}" class="">
                                                 <div class="text">All Courses</div>
                                             </a>
                                         </li>
@@ -138,7 +137,7 @@
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{url('admin/all/trashed/courses')}}" class="">
+                                            <a href="{{ url('admin/all/trashed/courses') }}" class="">
                                                 <div class="text">Courses</div>
                                             </a>
                                         </li>
@@ -446,12 +445,10 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="login.html" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-log-out"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Log out</div>
-                                                </a>
+                                                <form action="{{ route('logout') }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-lg btn-danger fs-3">logout</button>
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>
