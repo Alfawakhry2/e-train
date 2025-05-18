@@ -338,7 +338,7 @@ class AdminController extends Controller
             $request->validate(['desc' => 'required|string']);
             $desc = $request->desc;
         }
-        if ($request->has('image') && $request->title != null) {
+        if ($request->hasFile('image') && $request->title != null) {
             $request->validate(['image' => 'required|mimes:png,jpg,jpeg']);
             Storage::delete($category->image);
             $image = Storage::putFile('Category', $request->image);
@@ -391,6 +391,7 @@ class AdminController extends Controller
     public function PDeleteCategory($id)
     {
         $category = Category::withTrashed()->findorfail($id);
+        // Storage::delete($category->image);
         $category->forceDelete();
         return redirect()->back()->with('success', 'Category Deleted For Ever');
     }
@@ -450,6 +451,7 @@ class AdminController extends Controller
         // echo $start_date;
         //we convert it to int , cause the data come from form is string
         $duration = (int)$request->duration;
+        //if we used carbonIlluminate we cannot need to copy
         $end_date = $start_date->copy()->addDays($duration);
 
         // //rename and store in public

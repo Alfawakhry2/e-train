@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Student;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -40,10 +42,11 @@ class UserController extends Controller
             $user = User::create([
                 'email' => $googleUser->getEmail(),
                 'name' => $googleUser->getName(),
-                //not used , only not put null value 
+                //not used , only not put null value
                 'password' => Hash::make(Str::random(32)),
                 'email_verified_at' => now(),
             ]);
+            Mail::to($user->email)->send(new WelcomeMail($user->name));
         }
 
         // Handle student record
@@ -91,6 +94,7 @@ class UserController extends Controller
                 'password' => Hash::make(Str::random(32)),
                 'email_verified_at' => now(),
             ]);
+            Mail::to($user->email)->send(new WelcomeMail($user->name));
         }
 
         // Handle student record
