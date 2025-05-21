@@ -152,8 +152,8 @@ class AdminController extends Controller
                 //cause we not use the model for this
                 // we will deal with db directly
                 $request->validate([
-                    'course_status.*'=>['required' , 'string' , "in:not_started,completed,in_progress"],
-                    'course_location.*'=>['required' , 'string' , 'in:online,offline'],
+                    'course_status.*' => ['required', 'string', "in:not_started,completed,in_progress"],
+                    'course_location.*' => ['required', 'string', 'in:online,offline'],
                 ]);
 
                 DB::table('course_student')
@@ -206,7 +206,7 @@ class AdminController extends Controller
             'phone' => $phone,
             'address' => $address,
             // 'role' => $role,
-            'password'=>$password,
+            'password' => $password,
         ]);
 
 
@@ -596,4 +596,22 @@ class AdminController extends Controller
     }
     ##****************Start Manage Courses ****************************#
 
+
+    public function sendsms()
+    {
+        $basic  = new \Vonage\Client\Credentials\Basic("95cf2188", "9DTdZwxQd8JjQAWJ");
+        $client = new \Vonage\Client($basic);
+
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("201113250148","201155346186", 'Hello'),
+        );
+
+        $message = $response->current();
+
+        if ($message->getStatus() == 0) {
+            echo "The message was sent successfully\n";
+        } else {
+            echo "The message failed with status: " . $message->getStatus() . "\n";
+        }
+    }
 }

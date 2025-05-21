@@ -124,5 +124,7 @@ Route::controller(AdminController::class)->group(function () {
 
         ##**************** End Manage Courses****************************#
         /***************************************************************/
+
+        route::get('admin/sendsms' , 'sendsms');
     });
 });
